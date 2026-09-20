@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Baby Space</title>
+<style>
+:root{--green:#76c83b;--green2:#a7df69;--blue:#2b70a8;--sky:#8096d8}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;font-family:Arial,sans-serif;overflow:hidden}
+body{background:linear-gradient(#315d8e 0 42%,#8297d7 42% 72%,#b8df87 72%);color:#fff}
+.screen{width:100%;height:100%;display:none;position:relative}
+.screen.active{display:block}
+button{font:inherit;border:0;cursor:pointer}
+#splash{background:linear-gradient(#2d5c8b 0 45%,#8197d8 45% 75%,#75bf3d 75%)}
+.stars{position:absolute;inset:0;background:
+ radial-gradient(circle at 12% 57%,#fff 0 2px,transparent 3px),
+ radial-gradient(circle at 35% 51%,#fff 0 2px,transparent 3px),
+ radial-gradient(circle at 77% 61%,#fff 0 2px,transparent 3px),
+ radial-gradient(circle at 89% 55%,#fff 0 2px,transparent 3px)}
+.logo{position:absolute;top:12%;left:8%;right:8%;text-align:center;font-size:clamp(48px,12vw,82px);font-weight:900;letter-spacing:-5px;text-shadow:3px 4px 0 #fff,-1px -1px 0 #fff}
+.logo span:nth-child(1){color:#1688d2}.logo span:nth-child(2){color:#f05a4f}.logo span:nth-child(3){color:#f4c72e}.logo span:nth-child(4){color:#7ac943}.logo span:nth-child(5){color:#b04cc5}
+.babyface{font-size:72px;display:block;letter-spacing:0;margin-top:8px}
+.enter{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.96);color:#5d5d5d;border-radius:18px;padding:13px 54px;font-size:38px;font-weight:700;box-shadow:0 6px 0 rgba(0,0,0,.16)}
+#menu{background:#f7f7f7;color:#111;overflow:auto}
+.top{height:29%;min-height:180px;background:linear-gradient(#74c73d,#9bdd65);padding:22px 20px 10px;box-shadow:0 8px 18px #777;position:relative}
+.top h1{margin:25px 0 0;text-align:center;font-size:clamp(42px,10vw,66px);color:#fff;text-shadow:2px 3px 0 #666}
+.rainbow-title span:nth-child(1){color:#1688d2}.rainbow-title span:nth-child(2){color:#f05a4f}.rainbow-title span:nth-child(3){color:#f4c72e}.rainbow-title span:nth-child(4){color:#7ac943}.rainbow-title span:nth-child(5){color:#b04cc5}.rainbow-title span:nth-child(6){color:#1688d2}.rainbow-title span:nth-child(7){color:#f05a4f}.rainbow-title span:nth-child(8){color:#f4c72e}.rainbow-title span:nth-child(9){color:#7ac943}.badge{margin:auto;width:min(88%,470px);background:#fff;border:6px solid #2e90cf;border-radius:28px;color:#4b4b4b;text-align:center;padding:10px;font-size:clamp(22px,6vw,36px);font-weight:700;box-shadow:0 5px 0 #777}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:28px 20px 100px;max-width:700px;margin:auto}
+.tile{min-height:145px;border-radius:35px;background:#fff;box-shadow:0 7px 0 #aaa;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:72px;border:8px solid #1da1dc}
+.tile small{font-size:24px;font-weight:800;color:#222;margin-top:4px}
+.tile:nth-child(2){border-color:#f39b32}.tile:nth-child(3){border-color:#7fbe43}.tile:nth-child(4){border-color:#8c45a8}.tile:nth-child(5){border-color:#e85c63}.tile:nth-child(6){border-color:#29b7ad}
+.swipe{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);background:#79c943;color:#fff;border-radius:18px;padding:13px 45px;font-size:28px;font-weight:800;box-shadow:0 5px 0 #777}
+.panel{height:100%;background:#f7f7f7;color:#222;overflow:auto}
+.header{background:#76c83b;color:#fff;padding:18px;text-align:center;font-size:36px;font-weight:800;box-shadow:0 5px 12px #888;position:sticky;top:0;z-index:2}
+.back{position:absolute;left:12px;top:10px;background:#fff;color:#555;border-radius:15px;padding:8px 15px;font-size:22px;font-weight:800}
+.content{padding:24px;max-width:720px;margin:auto;text-align:center}
+.card{background:#fff;border-radius:28px;padding:24px;box-shadow:0 5px 15px #bbb;margin-bottom:20px}
+.bigemoji{font-size:110px}.bigtext{font-size:32px;font-weight:800}
+.colorrow{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.colorbtn{width:92px;height:92px;border-radius:50%;border:7px solid #fff;box-shadow:0 4px 9px #999;font-size:34px}
+#videoBox video{width:100%;border-radius:18px;background:#111}
+.piano{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;height:250px;align-items:stretch}
+.key{background:#fff;border:2px solid #222;border-radius:0 0 12px 12px;font-size:16px}
+.parent{font-size:19px;line-height:1.5;text-align:left}
+</style>
+</head>
+<body>
+
+<section id="splash" class="screen active">
+  <div class="stars"></div>
+  <div class="logo"><span>m</span><span>y</span> <span>b</span><span>a</span><span>by</span></div>
+  <button class="enter" onclick="show('menu')">Entrar</button>
+</section>
+
+<section id="menu" class="screen">
+  <div class="top">
+    <div class="badge"><span class="rainbow-title"><span>M</span><span>y</span> <span>B</span><span>a</span><span>b</span><span>y</span> <span>A</span><span>p</span><span>p</span></span></div>
+    <h1>Menú principal</h1>
+  </div>
+  <div class="grid">
+    <button class="tile" onclick="show('video')">📺<small>Vídeos</small></button>
+    <button class="tile" onclick="askWikipedia()">🔎<small>Aprender</small></button>
+    <button class="tile" onclick="show('colors')">🎨<small>Colores</small></button>
+    <button class="tile" onclick="show('music')">🎵<small>Música</small></button>
+    <button class="tile" onclick="show('learn')">🔤<small>Palabras</small></button>
+    <button class="tile" onclick="show('parents')">👨‍👩‍👧<small>Padres</small></button>
+  </div>
+  <button class="swipe" onclick="show('parents')">⚙ Padres</button>
+</section>
+
+<section id="video" class="screen panel">
+ <div class="header"><button class="back" onclick="show('menu')">←</button>📺 Vídeos</div>
+ <div class="content"><div class="card" id="videoBox">
+   <div class="bigemoji">🎬</div>
+   <div class="bigtext">Reproductor de vídeos</div>
+   <p>Elige un vídeo de tu dispositivo.</p>
+   <input type="file" accept="video/*" onchange="loadVídeos(event)">
+   <video id="player" controls playsinline style="display:none"></video>
+ </div></div>
+</section>
+
+<section id="games" class="screen panel">
+ <div class="header"><button class="back" onclick="show('menu')">←</button>🔎 Aprender</div>
+ <div class="content"><div class="card">
+   <div class="bigemoji" id="learnEmoji">🐟</div>
+   <div class="bigtext" id="learnWord">Pez</div>
+   <button class="enter" style="position:static;transform:none;margin-top:20px" onclick="nextWord()">Siguiente ➜</button>
+ </div></div>
+</section>
+
+<section id="colors" class="screen panel">
+ <div class="header"><button class="back" onclick="show('menu')">←</button>🎨 Colores</div>
+ <div class="content"><div class="card">
+  <div id="colorName" class="bigtext">Elige un color</div><div id="colorPreview" style="height:180px;border-radius:30px;margin:22px 0;background:#ddd"></div>
+  <div class="colorrow">
+   <button class="colorbtn" style="background:#ef5350" onclick="paint('Red','#ef5350')">🔴</button>
+   <button class="colorbtn" style="background:#ff9f43" onclick="paint('Orange','#ff9f43')">🟠</button>
+   <button class="colorbtn" style="background:#ffd93d" onclick="paint('Yellow','#ffd93d')">🟡</button>
+   <button class="colorbtn" style="background:#6bcb77" onclick="paint('Green','#6bcb77')">🟢</button>
+   <button class="colorbtn" style="background:#4dabf7" onclick="paint('Blue','#4dabf7')">🔵</button>
+   <button class="colorbtn" style="background:#b05ac7" onclick="paint('Purple','#b05ac7')">🟣</button>
+  </div>
+ </div></div>
+</section>
+
+<section id="music" class="screen panel">
+  <div class="header"><button class="back" onclick="show('menu')">←</button>🎵 Música</div>
+  <div class="content"><div class="card">
+   <div class="bigemoji">🎵</div>
+   <div class="bigtext">Reproductor de audio</div>
+   <p>Elige un archivo de audio de tu dispositivo.</p>
+   <input type="file" accept="audio/*" onchange="loadAudio(event)">
+   <audio id="audioPlayer" controls style="width:100%;margin-top:20px;display:none"></audio>
+  </div></div>
+</section>
+
+<section id="learn" class="screen panel">
+ <div class="header"><button class="back" onclick="show('menu')">←</button>🔤 Palabras</div>
+ <div class="content"><div class="card">
+  <div class="bigemoji" id="wordEmoji">🐟</div>
+  <div class="bigtext" id="wordDisplay">Pez</div>
+  <button class="enter" style="position:static;transform:none;margin-top:20px" onclick="nextWord()">Siguiente ➜</button>
+ </div></div>
+</section>
+
+<section id="parents" class="screen panel">
+ <div class="header"><button class="back" onclick="show('menu')">←</button>👨‍👩‍👧 Padres</div>
+ <div class="content"><div class="card parent">
+  <h2>Zona para padres</h2>
+  <p>This app is designed for simple baby-friendly activities. An adult should supervise children while using the device.</p>
+  <p>For videos or websites opened from this app, please review the content first and use your device's parental controls.</p>
+  <hr><p><b>Tip:</b> Keep volume comfortable and take regular breaks.</p>
+ </div></div>
+</section>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')];
+function show(id){screens.forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function loadVídeos(e){const f=e.target.files[0];if(!f)return;const v=document.getElementById('player');v.src=URL.createObjectURL(f);v.style.display='block';v.play().catch(()=>{})}
+function paint(name,c){document.getElementById('colorName').textContent=name;document.getElementById('colorPreview').style.background=c}
+const words=[
+ ['Casa','🏠'],['Perro','🐶'],['Gato','🐱'],['Pájaro','🐦'],
+ ['Flor','🌸'],['Sol','☀️'],['Silla','🪑'],['Árbol','🌳'],['Gafas','👓'],
+ ['Pez','🐟'],['Libro','📖'],['Piano','🎹'],['Cuadro','🖼'],['Balón','⚽️'],['Jirafa','🦒'],['Cocodrilo','🐊'],['Nube','☁️'],['Manzana','🍎'],['Canguro','🦘'],['Reloj','🕓']
+];
+let wi=0;
+function nextWord(){
+ wi=(wi+1)%words.length;
+ const w=words[wi];
+ document.getElementById('wordDisplay').textContent=w[0];
+ document.getElementById('wordEmoji').textContent=w[1];
+ document.getElementById('learnWord').textContent=w[0];
+ document.getElementById('learnEmoji').textContent=w[1];
+}
+function loadAudio(e){const f=e.target.files[0];if(!f)return;const a=document.getElementById('audioPlayer');a.src=URL.createObjectURL(f);a.style.display='block';a.play().catch(()=>{})}
+</script>
+
+<div id="wikiModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;align-items:center;justify-content:center;padding:24px">
+  <div style="background:white;color:#222;border-radius:28px;padding:28px;max-width:430px;width:100%;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.35)">
+    <div style="font-size:58px">🔎</div>
+    <div style="font-size:30px;font-weight:800;margin:10px 0 24px">¿Entrar a Wikipedia?</div>
+    <div style="display:flex;gap:12px;justify-content:center">
+      <button onclick="closeWiki()" style="background:#ddd;color:#333;border:0;border-radius:16px;padding:13px 22px;font-size:22px;font-weight:700">Cancelar</button>
+      <button onclick="openWikipedia()" style="background:#76c83b;color:white;border:0;border-radius:16px;padding:13px 22px;font-size:22px;font-weight:700">Entrar</button>
+    </div>
+  </div>
+</div>
+<script>
+function askWikipedia(){
+  document.getElementById('wikiModal').style.display='flex';
+}
+function closeWiki(){
+  document.getElementById('wikiModal').style.display='none';
+}
+function openWikipedia(){
+  window.location.href='https://es.wikipedia.org/';
+}
+</script>
+</body>
+</html>
